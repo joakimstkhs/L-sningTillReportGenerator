@@ -26,6 +26,11 @@ namespace ReportGenerator
         public void Generate() => Console.WriteLine("Word Report Generated.");
     }
 
+    public class PowerPointReport : IReport
+    {
+        public void Generate() => Console.WriteLine("Power Point Report Generated.");
+    }
+
     public class ReportGenerator
     {
         public IReport CreateReport(string reportType)
@@ -36,6 +41,8 @@ namespace ReportGenerator
                 return new ExcelReport();
             else if (reportType == "Word")
                 return new WordReport();
+            else if (reportType == "PowerPoint")
+                return new PowerPointReport();
             else
                 throw new ArgumentException("Invalid report type");
         }
