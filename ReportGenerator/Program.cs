@@ -1,31 +1,27 @@
-﻿namespace ReportGenerator
+﻿using System;
+using ReportGenerator;
+
+namespace ReportGenerator
 {
-    public static class Program
+    class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
-            var reportGenerator = new ReportGenerator();
+            var factory = new ReportFactory();
+            var generator = new ReportGenerator(factory);
             
-            var pdfReport = reportGenerator.CreateReport("PDF");
-            pdfReport.Generate();
-
-            var excelReport = reportGenerator.CreateReport("Excel");
-            excelReport.Generate();
-
-            var wordReport = reportGenerator.CreateReport("Word");
-            wordReport.Generate();
-            
-            var powerPointReport = reportGenerator.CreateReport("PowerPoint");
-            powerPointReport.Generate();
-
-            try
+            // Hämtar all tillgängliga rapporttyper
+            foreach (ReportType type in Enum.GetValues(typeof(ReportType)))
             {
-                var invalidReport = reportGenerator.CreateReport("InvalidType");
-                invalidReport.Generate();
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine(ex.Message);
+                try
+                {
+                    var report = generator.CreateReport(type);
+                    report.Generate();
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine($"{type}: {ex.Message}");
+                }
             }
         }
     }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ReportGenerator
 {
@@ -10,41 +6,56 @@ namespace ReportGenerator
     {
         void Generate();
     }
-
-    public class PdfReport : IReport
+    
+    public class Report : IReport
     {
-        public void Generate() => Console.WriteLine("PDF Report Generated.");
+        private readonly ReportType _reportType;
+
+        public Report(ReportType reportType)
+        {
+            _reportType = reportType;
+        }
+
+        public void Generate()
+        {
+            Console.WriteLine($"{_reportType} Report Generated.");
+        }
     }
 
-    public class ExcelReport : IReport
+    // Tillgängliga rapporttyper
+    public enum ReportType
     {
-        public void Generate() => Console.WriteLine("Excel Report Generated.");
+        Pdf,
+        Excel,
+        Word,
+        PowerPoint
     }
 
-    public class WordReport : IReport
+    public interface IReportFactory
     {
-        public void Generate() => Console.WriteLine("Word Report Generated.");
+        IReport CreateReport(ReportType type);
     }
 
-    public class PowerPointReport : IReport
+    public class ReportFactory : IReportFactory
     {
-        public void Generate() => Console.WriteLine("Power Point Report Generated.");
+        public IReport CreateReport(ReportType type)
+        {
+            return new Report(type);
+        }
     }
 
     public class ReportGenerator
     {
-        public IReport CreateReport(string reportType)
+        private readonly IReportFactory _factory;
+
+        public ReportGenerator(IReportFactory factory)
         {
-            if (reportType == "PDF")
-                return new PdfReport();
-            else if (reportType == "Excel")
-                return new ExcelReport();
-            else if (reportType == "Word")
-                return new WordReport();
-            else if (reportType == "PowerPoint")
-                return new PowerPointReport();
-            else
-                throw new ArgumentException("Invalid report type");
+            _factory = factory;
+        }
+
+        public IReport CreateReport(ReportType type)
+        {
+            return _factory.CreateReport(type);
         }
     }
 }
