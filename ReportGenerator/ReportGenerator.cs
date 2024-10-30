@@ -34,7 +34,6 @@ namespace ReportGenerator
 
     public class ReportGenerator
     {
-        // Skapar och returnerar en ny rapport av angiven typ
         public IReport CreateReport(ReportType type)
         {
             if (!Enum.IsDefined(typeof(ReportType), type))
