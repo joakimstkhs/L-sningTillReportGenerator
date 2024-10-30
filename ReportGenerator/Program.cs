@@ -1,5 +1,4 @@
 ﻿using System;
-using ReportGenerator;
 
 namespace ReportGenerator
 {
@@ -7,21 +6,13 @@ namespace ReportGenerator
     {
         static void Main(string[] args)
         {
-            var factory = new ReportFactory();
-            var generator = new ReportGenerator(factory);
+            var generator = new ReportGenerator();
             
-            // Hämtar all tillgängliga rapporttyper
+            // Hämtar och genererar alla tillgängliga rapporttyper
             foreach (ReportType type in Enum.GetValues(typeof(ReportType)))
             {
-                try
-                {
-                    var report = generator.CreateReport(type);
-                    report.Generate();
-                }
-                catch (ArgumentException ex)
-                {
-                    Console.WriteLine($"{type}: {ex.Message}");
-                }
+                var report = generator.CreateReport(type);
+                report.Generate();
             }
         }
     }

@@ -7,6 +7,7 @@ namespace ReportGenerator
         void Generate();
     }
     
+    // Basrapportklass för olika rapporttyper
     public class Report : IReport
     {
         private readonly ReportType _reportType;
@@ -31,31 +32,17 @@ namespace ReportGenerator
         PowerPoint
     }
 
-    public interface IReportFactory
-    {
-        IReport CreateReport(ReportType type);
-    }
-
-    public class ReportFactory : IReportFactory
-    {
-        public IReport CreateReport(ReportType type)
-        {
-            return new Report(type);
-        }
-    }
-
     public class ReportGenerator
     {
-        private readonly IReportFactory _factory;
-
-        public ReportGenerator(IReportFactory factory)
-        {
-            _factory = factory;
-        }
-
+        // Skapar och returnerar en ny rapport av angiven typ
         public IReport CreateReport(ReportType type)
         {
-            return _factory.CreateReport(type);
+            if (!Enum.IsDefined(typeof(ReportType), type))
+            {
+                throw new ArgumentException("Invalid report type.");
+            }
+            
+            return new Report(type);
         }
     }
 }
