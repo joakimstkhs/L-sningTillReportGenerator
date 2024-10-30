@@ -14,6 +14,9 @@
 
             var wordReport = reportGenerator.CreateReport("Word");
             wordReport.Generate();
+            
+            var powerPointReport = reportGenerator.CreateReport("PowerPoint");
+            powerPointReport.Generate();
 
             try
             {
