@@ -6,27 +6,27 @@
         {
             var reportGenerator = new ReportGenerator();
             
-            var pdfReport = reportGenerator.CreateReport(ReportType.Pdf);
+            var pdfReport = reportGenerator.CreateReport("Pdf");
             pdfReport.Generate();
 
-            var excelReport = reportGenerator.CreateReport(ReportType.Excel);
+            var excelReport = reportGenerator.CreateReport("Excel");
             excelReport.Generate();
 
-            var wordReport = reportGenerator.CreateReport(ReportType.Word);
+            var wordReport = reportGenerator.CreateReport("Word");
             wordReport.Generate();
             
-            var powerPointReport = reportGenerator.CreateReport(ReportType.PowerPoint);
+            var powerPointReport = reportGenerator.CreateReport("PowerPoint");
             powerPointReport.Generate();
 
-            //try
-            //{
-            //    var invalidReport = reportGenerator.CreateReport("InvalidType");
-            //    invalidReport.Generate();
-            //}
-            //catch (ArgumentException ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //}
+            try
+            {
+                var invalidReport = reportGenerator.CreateReport("InvalidReport");
+                invalidReport.Generate();
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

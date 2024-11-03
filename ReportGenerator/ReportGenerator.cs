@@ -40,15 +40,20 @@ namespace ReportGenerator
 
     public class ReportGenerator
     {
-        public IReport CreateReport(ReportType reportType)
+        public IReport CreateReport(string reportType)
         {
-            return reportType switch
+            if (string.IsNullOrWhiteSpace(reportType))
             {
-                ReportType.Pdf => new PdfReport(),
-                ReportType.Excel => new ExcelReport(),
-                ReportType.Word => new WordReport(),
-                ReportType.PowerPoint => new PowerPointReport(),
-                _ => throw new ArgumentOutOfRangeException(nameof(reportType), reportType, "Invalid report type specified.")
+                throw new ArgumentNullException(nameof(reportType), "Report type cannot be empty.");
+            }
+
+            return reportType.ToLower() switch
+            {
+                "pdf" => new PdfReport(),
+                "excel" => new ExcelReport(),
+                "word" => new WordReport(),
+                "powerpoint" => new PowerPointReport(),
+                _ => throw new ArgumentException($"Invalid report type: {reportType}. Available types are: pdf, excel, word, powerpoint")
             };
         }
     }
