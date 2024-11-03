@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace ReportGenerator
 {
+    public enum ReportType
+    {
+        Pdf,
+        Excel,
+        Word,
+        PowerPoint
+    }
     public interface IReport
     {
         void Generate();
@@ -33,18 +40,17 @@ namespace ReportGenerator
 
     public class ReportGenerator
     {
-        public IReport CreateReport(string reportType)
+        public IReport CreateReport(ReportType reportType)
         {
-            if (reportType == "PDF")
-                return new PdfReport();
-            else if (reportType == "Excel")
-                return new ExcelReport();
-            else if (reportType == "Word")
-                return new WordReport();
-            else if (reportType == "PowerPoint")
-                return new PowerPointReport();
-            else
-                throw new ArgumentException("Invalid report type");
+            return reportType switch
+            {
+                ReportType.Pdf => new PdfReport(),
+                ReportType.Excel => new ExcelReport(),
+                ReportType.Word => new WordReport(),
+                ReportType.PowerPoint => new PowerPointReport(),
+                _ => throw new ArgumentOutOfRangeException(nameof(reportType), reportType, "Invalid report type specified.")
+            };
         }
     }
+
 }
