@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace ReportGenerator
 {
-    public enum ReportType
-    {
-        Pdf,
-        Excel,
-        Word,
-        PowerPoint
-    }
+    
     public interface IReport
     {
         void Generate();
@@ -42,11 +36,6 @@ namespace ReportGenerator
     {
         public IReport CreateReport(string reportType)
         {
-            if (string.IsNullOrWhiteSpace(reportType))
-            {
-                throw new ArgumentNullException(nameof(reportType), "Report type cannot be empty.");
-            }
-
             return reportType.ToLower() switch
             {
                 "pdf" => new PdfReport(),
