@@ -1,31 +1,27 @@
 ﻿namespace ReportGenerator
 {
-    public static class Program
+    using ReportGenerator.Services;
+    using System;
+
+    public class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            var reportGenerator = new ReportGenerator();
+            var factoryProvider = new ReportFactoryProvider();
+            var reportGenerator = new ReportGeneratorService(factoryProvider);
+
             
-            var pdfReport = reportGenerator.CreateReport("Pdf");
+            var pdfReport = reportGenerator.CreateReport("pdf");
             pdfReport.Generate();
 
-            var excelReport = reportGenerator.CreateReport("Excel");
-            excelReport.Generate();
+            var powerpointReport = reportGenerator.CreateReport("powerpoint");
+            powerpointReport.Generate();
 
-            var wordReport = reportGenerator.CreateReport("Word");
-            wordReport.Generate();
             
-            var powerPointReport = reportGenerator.CreateReport("PowerPoint");
-            powerPointReport.Generate();
-
-            try
+            Console.WriteLine("\nAvailable report types:");
+            foreach (var type in reportGenerator.GetAvailableReportTypes())
             {
-                var invalidReport = reportGenerator.CreateReport("InvalidReport");
-                invalidReport.Generate();
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"{type}");
             }
         }
     }
