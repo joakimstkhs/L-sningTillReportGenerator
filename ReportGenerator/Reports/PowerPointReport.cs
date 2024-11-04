@@ -1,14 +1,13 @@
-namespace ReportGenerator.Reports
+namespace ReportGenerator.Reports;
+
+using Base;
+
+public class PowerPointReport : BaseReport
 {
-    using ReportGenerator.Base;
-
-    public class PowerPointReport : BaseReport
+    public override void Generate()
     {
-        public override void Generate()
-        {
-            Console.WriteLine("PowerPoint report generated.");
-        }
-
-        public override string GetReportType() => "powerpoint";
+        Console.WriteLine("PowerPoint redo att presenteras...");
     }
+
+    public override string GetReportType() => "powerpoint";
 }

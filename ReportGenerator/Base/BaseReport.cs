@@ -1,13 +1,11 @@
-namespace ReportGenerator.Base
+namespace ReportGenerator.Base;
+
+using Interfaces;
+
+public abstract class BaseReport : IReport
 {
-    using ReportGenerator.Interfaces;
-    using System;
-
-    public abstract class BaseReport : IReport
-    {
-        public abstract void Generate();
+    public abstract void Generate();
      
-        public abstract string GetReportType();
+    public abstract string GetReportType();
 
-    }
 }

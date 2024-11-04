@@ -1,14 +1,13 @@
-namespace ReportGenerator.Reports
+namespace ReportGenerator.Reports;
+
+using Base;
+
+public class ExcelReport : BaseReport
 {
-    using ReportGenerator.Base;
-
-    public class ExcelReport : BaseReport
+    public override void Generate()
     {
-        public override void Generate()
-        {
-            Console.WriteLine("Excel report generated.");
-        }
-
-        public override string GetReportType() => "excel";
+        Console.WriteLine("Läser in Ark...");
     }
+
+    public override string GetReportType() => "excel";
 }

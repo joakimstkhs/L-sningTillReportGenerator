@@ -1,14 +1,13 @@
-namespace ReportGenerator.Reports
+namespace ReportGenerator.Reports;
+
+using Base;
+
+public class WordReport : BaseReport
 {
-    using ReportGenerator.Base;
-
-    public class WordReport : BaseReport
+    public override void Generate()
     {
-        public override void Generate()
-        {
-            Console.WriteLine("Word report generated.");
-        }
-
-        public override string GetReportType() => "word";
+        Console.WriteLine("Text redo att läsas...");
     }
+
+    public override string GetReportType() => "word";
 }

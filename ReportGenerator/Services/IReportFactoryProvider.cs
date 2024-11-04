@@ -1,10 +1,9 @@
-namespace ReportGenerator.Services
-{
-    using ReportGenerator.Interfaces;
-    using System.Collections.Generic;
+namespace ReportGenerator.Services;
 
-    public interface IReportFactoryProvider
-    {
-        IReport GetReport(string reportType);
-    }
+using Interfaces;
+
+public interface IReportFactoryProvider
+{
+    IReport GetReport(string reportType);
+    IEnumerable<string> GetAvailableReportTypes();
 }

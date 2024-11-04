@@ -1,8 +1,7 @@
-namespace ReportGenerator.Interfaces
+namespace ReportGenerator.Interfaces;
+
+public interface IReport
 {
-    public interface IReport
-    {
-        void Generate();
-        string GetReportType();
-    }
+    void Generate();
+   string GetReportType(); 
 }

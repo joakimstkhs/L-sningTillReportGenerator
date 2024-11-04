@@ -1,14 +1,13 @@
-namespace ReportGenerator.Reports
+namespace ReportGenerator.Reports;
+
+using Base;
+
+public class PdfReport : BaseReport
 {
-    using ReportGenerator.Base;
-
-    public class PdfReport : BaseReport
+    public override void Generate()
     {
-        public override void Generate()
-        {
-            Console.WriteLine("Pdf report generated."); 
-        }
-
-        public override string GetReportType() => "pdf";
+        Console.WriteLine("Pdfer redo att läsas..."); 
     }
+
+    public override string GetReportType() => "pdf";
 }
