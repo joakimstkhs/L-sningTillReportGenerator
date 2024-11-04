@@ -17,12 +17,17 @@
             var powerpointReport = reportGenerator.CreateReport("powerpoint");
             powerpointReport.Generate();
 
-            
-            Console.WriteLine("\nAvailable report types:");
-            foreach (var type in reportGenerator.GetAvailableReportTypes())
+            try
             {
-                Console.WriteLine($"{type}");
+                var invalidReport = reportGenerator.CreateReport("invalid");
+                invalidReport.Generate();
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+          
+            }
+
         }
     }
 }

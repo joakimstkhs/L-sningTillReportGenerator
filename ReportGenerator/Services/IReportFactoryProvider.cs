@@ -6,6 +6,5 @@ namespace ReportGenerator.Services
     public interface IReportFactoryProvider
     {
         IReport GetReport(string reportType);
-        IEnumerable<string> GetAvailableReportTypes();
     }
 }

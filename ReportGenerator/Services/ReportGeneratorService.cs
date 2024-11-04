@@ -17,6 +17,5 @@ namespace ReportGenerator.Services
             return _factoryProvider.GetReport(reportType);
         }
 
-        public IEnumerable<string> GetAvailableReportTypes() => _factoryProvider.GetAvailableReportTypes();
     }
 }
